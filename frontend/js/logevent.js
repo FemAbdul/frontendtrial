@@ -1,7 +1,7 @@
 // Store users in local storage as an array of users
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
-// Show login page
+
 function showLoginPage() {
     const content = document.getElementById('content');
     content.innerHTML = `
@@ -12,63 +12,56 @@ function showLoginPage() {
                     <form id="loginForm">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                            <input type="text" class="form-control" id="username" placeholder="username" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                            <input type="password" class="form-control" id="password" placeholder="password" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Login</button>
                         <div id="errorMessage" class="text-danger text-center mt-3"></div>
                     </form>
                     <div class="text-center mt-3">
-                        <p>New user? <a href="#" onclick="showPage('register')">Register here</a></p>
+                        <p>New user? <a href="#" class="nav-link" data-page="register">Register here</a></p>
                     </div>
-                     <button id="loginWith42ID" class="login-42-button">Login with 42 ID</button>
+                    <button id="loginWith42ID" class="login-42-button">Login with 42 ID</button>
                 </div>
             </div>
         </div>`;
+    
     document.getElementById('loginForm').addEventListener('submit', handleLogin);
     document.getElementById('loginWith42ID').addEventListener('click', handle42Login);
+    setupPageLinks(); // Add this line to set up the page links
+    updateNavbar('loggedOut');
 }
 
-// Show registration page
 function showRegisterPage() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <div id="register" class="page">
-            <div class="row justify-content-center align-items-center" style="height:80vh;">
-                <div class="col-md-4">
-                    <h3 class="text-center">Register</h3>
-                    <form id="registerForm">
-    <div class="mb-3">
-        <label for="regUsername" class="form-label">Username</label>
-        <input type="text" class="form-control" id="regUsername" placeholder="Choose a username" required>
-    </div>
-    <div class="mb-3">
-        <label for="displayName" class="form-label">Display Name</label>
-        <input type="text" class="form-control" id="displayName" placeholder="Choose a display name" required>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-    </div>
-    <div class="mb-3">
-        <label for="regPassword" class="form-label">Password</label>
-        <input type="password" class="form-control" id="regPassword" placeholder="Choose a password" required>
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Register</button>
-    <div id="registerMessage" class="text-danger text-center mt-3"></div>
-</form>
-                    <div class="text-center mt-3">
-                        <p>Already have an account? <a href="#" onclick="showPage('login')">Login here</a></p>
-                    </div>
+            <h2>Register</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <input type="text" id="regUsername" class="form-control" placeholder="Username" required>
                 </div>
-            </div>
-        </div>`;
+                <div class="form-group">
+                    <input type="text" id="displayName" class="form-control" placeholder="Display Name (optional)">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="regPassword" class="form-control" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <div id="registerMessage"></div>
+        </div>
+    `;
+    
     document.getElementById('registerForm').addEventListener('submit', handleRegister);
+    updateNavbar('loggedOut');
 }
-
 
 // Handle login form submission
 function handleLogin(event) {
