@@ -4,7 +4,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
-    background: #040303;
+    background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
@@ -30,7 +30,7 @@
 .friend-name {
     flex: 2;
     font-size: 14px;
-    color: #f8f8f8;
+    color: #333;
 }
 
 /* Status indicator */
@@ -38,7 +38,6 @@
     flex: 1;
     font-size: 14px;
     text-align: center;
-    color: #f8f8f8;
 }
 
 /* Add friend button */
@@ -73,6 +72,6 @@
 /* Header styling */
 .popup-content h2 {
     margin: 0;
-    color: #ffffff;
+    color: #333;
     text-align: center;
 }
